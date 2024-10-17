@@ -28,7 +28,7 @@ app.listen(PORT, () => {
 //endpoint for root route
 app.get("/", (req, res) => {
   res.json({
-    message: "Stop looking at my root route.)",
+    message: "Stop looking at my root route. ;)",
   });
 });
 //my endpoints
@@ -66,7 +66,7 @@ app.get("/guestbook", async (req, res) => {
     res.status(200).json(guestbookData.rows);
   } catch (error) {
     //our server will give us this error, if there is a problem with the code in try
-    console.error("This is a fatal error!", error);
+    console.error("This is a fatal error! How dramatic!", error);
     res.status(500).json({ success: false });
   }
 });
@@ -111,7 +111,7 @@ app.post("/add-guestbook", async (req, res) => {
     );
     res.status(200).json(newGuestbook.rows);
   } catch (error) {
-    console.error("This is a fatal error!", error);
+    console.error("This is a fatal error! ", error);
     res.status(500).json({ success: false });
   }
 });

@@ -18,7 +18,6 @@ dotenv.config();
 
 //set up db pool with connection string from .env
 const dbConnectionString = process.env.DATABASE_URL;
-
 export const db = new pg.Pool({ connectionString: dbConnectionString });
 //set up a port and listen to it
 const PORT = 8080;
@@ -28,7 +27,7 @@ app.listen(PORT, () => {
 //endpoint for root route
 app.get("/", (req, res) => {
   res.json({
-    message: "Stop looking at my root route.)",
+    message: "Stop looking at my root route. ;)",
   });
 });
 //my endpoints
@@ -43,12 +42,7 @@ app.get("/", (req, res) => {
 //my imports
 
 //set up our db using the connection string from supabase and the pg package
-app.get("/guestbook", async (req, res) => {
-  const query = await db.query(`SELECT * FROM guestbook`);
-  //we can wrangle the query response to get the rows property only.
-  res.json(query.rows);
-  console.log(query);
-});
+
 //write a READ endpoint
 //As a user, I want to see a list of the biscuits and descriptions
 //we need async and await because the time it takes Supabase to get the data is not the same as the time it takes for the computer to read our server file
@@ -66,7 +60,7 @@ app.get("/guestbook", async (req, res) => {
     res.status(200).json(guestbookData.rows);
   } catch (error) {
     //our server will give us this error, if there is a problem with the code in try
-    console.error("This is a fatal error!", error);
+    console.error("This is a fatal error! How dramatic!", error);
     res.status(500).json({ success: false });
   }
 });
@@ -111,7 +105,10 @@ app.post("/add-guestbook", async (req, res) => {
     );
     res.status(200).json(newGuestbook.rows);
   } catch (error) {
-    console.error("This is a fatal error!", error);
+    console.error(
+      "This is a fatal error! How dramatic! You cannot add new biscuits",
+      error
+    );
     res.status(500).json({ success: false });
   }
 });
